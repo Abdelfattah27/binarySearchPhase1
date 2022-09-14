@@ -1,0 +1,67 @@
+// link =>  https://codeforces.com/group/nMgBPsURd2/contest/346685/problem/I
+
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int>vec ;
+
+string s1, s2 ;
+const int N  = 3e5  ;
+int n, m ;
+int freq [N] ;
+int bin()
+{
+    int l = N, f = 0, ans = 0, mid, k = 0  ;
+    while(l >= f)
+    {
+        k = 0 ;
+        mid = ( l+f ) / 2 ;
+        for(auto it : freq)
+        {
+            k += it / mid ;
+        }
+        if(k >= m )
+        {
+            ans = mid ;
+            f = mid  + 1;
+        }
+        else
+        {
+            l = mid - 1 ;
+
+        }
+
+    }
+    return ans ;
+}
+
+int main()
+{
+
+    cin>>n >> m ;
+    vec.resize(n) ;
+    for(auto &it : vec) cin>>it, freq[it] ++ ;
+    int num = bin() ;
+    if(num)
+    {
+        int i = 0  ;
+        for(auto it : freq)
+        {
+            if(it / num )
+            {
+                int u = it / num  ;
+                for(int j = 0 ; j < u ; j++ )
+                {
+                    if(!m) break ;
+                    cout<<i << " " ;
+                    m -- ;
+
+                }
+            }
+            i++ ;
+        }
+    }
+
+}
